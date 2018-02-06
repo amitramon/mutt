@@ -7,7 +7,8 @@ set from = $my_full_email_4
 #set sendmail  = "/usr/bin/msmtp -a gmail"
 set mbox      = "+riseup/INBOX" # or archive?
 # unset record
-set record = `printf '%s/%s' +riseup-sent $(date +%Y-%m)`
+# set record = `printf '%s/%s' +riseup-sent $(date +%Y-%m)`
+set record = "+riseup/Sent"
 set postponed = "+riseup/drafts"
 set sort=threads
 set sort_aux = last-date-received

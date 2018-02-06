@@ -39,6 +39,7 @@ source "$my_bin_dir/get_theme|" # select theme based on terminal capabilities
 
 set my_theme = "" 		# initial value for the get_next_theme script
 
+
 macro generic,index,pager <f12> "\
 <enter-command>source \"$my_bin_dir/get_next_theme \$my_theme|\"<enter>\
 <enter-command>uncolor *<enter>\
@@ -75,11 +76,15 @@ set message_cachedir = ~/var/mutt/cache/messages
 
 # maildir settings
 set mbox_type           = Maildir                               # mailbox type
-set folder              = ~/Mail                                # mailbox location
-set spoolfile           = "+main/INBOX"                        # GMail is default inbox
+# set folder              = ~/test-mail/Mail                                # mailbox location
+set folder              = ~/.mail                                # mailbox location
+#set spoolfile           = "+main/INBOX"                        # GMail is default inbox
+#set spoolfile           = "+amitlst/mail"                        # GMail is default inbox
+set spoolfile           = "+gmail-ar-archive/mail"                        # GMail is default inbox
 
-source  $my_mutt_home/mailboxes
-
+# virtual mailboxes for notmuch integration
+set virtual_spoolfile=yes
+source $my_mutt_home/mailboxes
 
 # unset folder
 
@@ -94,6 +99,8 @@ source  $my_mutt_home/include/autoview
 source  $my_mutt_home/include/other-hooks
 source  $my_mutt_home/include/macros
 source  $my_mutt_home/include/lists
+source  $my_mutt_home/include/sidebar
+source  $my_mutt_home/include/notmuch
 # source  $my_mutt_home/include/bindings
 
 

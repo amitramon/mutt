@@ -3,9 +3,11 @@
 # mailboxes
 #
 
-mailboxes +main/INBOX +main/archive +main/sent +main/spam
-mailboxes +riseup/INBOX +riseup/archive +riseup/Sent +riseup/Spam
+virtual-mailboxes "inbox" "notmuch://?query=tag:inbox"
+virtual-mailboxes "unread" "notmuch://?query=tag:unread"
+virtual-mailboxes "archive" "notmuch://?query=tag:archive"
+virtual-mailboxes "sent" "notmuch://?query=tag:sent"
+virtual-mailboxes "newsletters" "notmuch://?query=tag:newsletters"
 
 # additional mailboxes in a private (not in vcs) file
 source  "$my_bin_dir/mutt_source $my_private_config/mailboxes|"
-
