@@ -1,0 +1,61 @@
+# -*- muttrc -*-
+#
+# Options
+#
+
+set my_mask=$mask
+# set mask="!^\.[^.]"
+
+set postpone=ask-no	# Ask about postponing
+set mark_old=no		# Don't use "old" on emails.  They're either read or new.
+set mask="!^\\.[^.]"	# Do not show hidden files in directory browser
+set hidden_host=yes	# Ignore hostname when qualifying local addresses.
+set quit=ask-yes
+
+set move=no				# Don't move to mbox folder
+set noconfirmappend			# Just append, don't hassle me.
+set copy				# Save copies of outgoing messages
+set delete=yes				# Do not ask before deleting messages
+
+set help=no			# hide top help bar
+
+set wait_key=no				# Don't show the "Press any key to continue..." message.
+
+# set implicit_autoview=yes		# Autoview every MIME type with a copiousoutput entry in mailcap.
+
+# abook integration
+#set query_command = "abook --mutt-query '%s'"
+### Options
+set beep_new
+# set query_command=muttquery.py
+set query_command="lbdbq '%s'"
+
+set forward_edit=ask-no
+set text_flowed				# Enable format=flowed for text/plain.
+set hdrs=yes				# Enable my_hdr fields
+
+# set print_command="muttprint -D"
+# set print_command="printcmd"
+# set print_command="a2ps -1 --borders=no -g -Email"
+# set print_command="/usr/bin/mp -A4 -F -l -m -left 74 -right 74 | lpr -P PDF"
+set print_command="paps --rtl | lpr -P PDF"
+
+# If set to "yes" outbound PGP emails will be saved unsigned and unencrypted.
+# Please don't do this.  Use GnuPG's "encrypt-to" option instead.
+set fcc_clear=no
+
+# Check my mutt-specific mailcap before consulting the system-wide one.
+set mailcap_path="${HOME}/.mutt/mailcap:/etc/mailcap"
+
+# If I have messages tagged, apply commands to all of them, regardless of the
+# presence or absence of tag-prefix.
+set auto_tag
+# If I pipe messages to a command, run the command for each message.  (The
+# default is to concatenate the messages and only run the command once.)
+set pipe_split
+
+# history
+
+set history=20 # default is 10
+set history_file="$my_mutt_home/.mutt_history" # default is ~/.mutthistory
+set save_history=50		       # default is 0 - no history is saved to file

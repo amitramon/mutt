@@ -1,0 +1,100 @@
+# -*- muttrc -*-
+#
+# Account setup
+#
+
+#------------------------------------------------------------
+#
+# General basic settings
+#
+#------------------------------------------------------------
+
+reset all			# undo previous settings for reloads of this file
+unhook *			# ditto
+
+#####################
+# config directories
+#####################
+# note: it seems that tilde is not always expanded, so use absolute path.
+# (e.g. when setting a variable using a shell script as in:
+#   'set status_format = "~/bin/get_status|")
+set my_mutt_home = "/home/amit/.mutt"	# some convenience variables
+set my_private_config = "$my_mutt_home/private-settings"
+set my_sendmail_profiles_dir = "$my_mutt_home/sendmail-profiles"
+set my_themes_dir = "$my_mutt_home/themes"
+set my_bin_dir = "$my_mutt_home/bin"
+
+# private settings - most probably email addresses and similar stuff
+# that one wouldn't like to keep in vcs.
+# as an example, look at the file private-settings-template.
+source  "$my_bin_dir/mutt_source $my_private_config/settings|"
+
+# this is required, even if lbdb is used, in order to be
+# able to complete aliases with TAB:
+# source aliases if file exists
+source  "$my_bin_dir/mutt_source $my_private_config/aliases|"
+
+# color themes
+source "$my_bin_dir/get_theme|" # select theme based on terminal capabilities
+
+set my_theme = "" 		# initial value for the get_next_theme script
+
+macro generic,index,pager <f12> "\
+<enter-command>source \"$my_bin_dir/get_next_theme \$my_theme|\"<enter>\
+<enter-command>uncolor *<enter>\
+<enter-command>source $my_themes_dir/\$my_theme<enter>\
+<refresh>\
+<enter-command>reset arrow_cursor;set ?my_theme<enter>"\
+ "Change color theme"
+
+
+# alternates - this helps Mutt to identify addresses that are mine
+alternates "$my_email_1|$my_email_2|$my_email_3|$my_email_4"
+
+# groups
+group -group gmail-users -rx '.*@gmail.com'
+
+
+# Reply to a message using the address it was sent to
+set reverse_name = yes
+set reverse_realname = no
+
+
+set maildir_header_cache_verify = yes
+unset maildir_trash  # delete messages (or move to trash), don't just mark them as deleted
+set mail_check = 10 # 30
+set timeout = 0 #10
+set header_cache = ~/var/mutt/cache/headers
+set message_cachedir = ~/var/mutt/cache/messages
+
+#------------------------------------------------------------
+#
+# Accounts & Folders
+#
+#------------------------------------------------------------
+
+# maildir settings
+set mbox_type           = Maildir                               # mailbox type
+set folder              = ~/Mail                                # mailbox location
+set spoolfile           = "+main/INBOX"                        # GMail is default inbox
+
+source  $my_mutt_home/mailboxes
+
+
+# unset folder
+
+source  $my_mutt_home/include/display
+source  $my_mutt_home/include/composing
+source  $my_mutt_home/include/options
+source  $my_mutt_home/include/headers
+source  $my_mutt_home/include/folder-hooks
+# source  $my_mutt_home/include/save-hooks
+source  $my_mutt_home/include/send-hooks
+source  $my_mutt_home/include/autoview
+source  $my_mutt_home/include/other-hooks
+source  $my_mutt_home/include/macros
+source  $my_mutt_home/include/lists
+# source  $my_mutt_home/include/bindings
+
+
+

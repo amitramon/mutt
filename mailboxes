@@ -1,0 +1,11 @@
+# -*- muttrc -*-
+#
+# mailboxes
+#
+
+mailboxes +main/INBOX +main/archive +main/sent +main/spam
+mailboxes +riseup/INBOX +riseup/archive +riseup/Sent +riseup/Spam
+
+# additional mailboxes in a private (not in vcs) file
+source  "$my_bin_dir/mutt_source $my_private_config/mailboxes|"
+

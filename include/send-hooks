@@ -1,0 +1,30 @@
+# -*- muttrc -*-
+#
+# Send (and message) hooks
+#
+
+## From and Signature ##
+# The default account is now chosen by a folder-hook, see there for more information.
+# send-hook .* 'my_hdr From: john smith <smith@example.com>'
+# send-hook .* 'set from="john smith <smith@example.com>"'
+
+# Example:
+# set initial signature:
+# send-hook .* 'set signature="~/.signature"'
+# the signature for special cases: body analysis to determine signature
+# set my_friendlywords='~b "(kiss|hug|love)"'
+# message-hook	"!~l (~L john|~B '[^[:alpha:]]angel[^[:alpha:]]') $my_friendlywords"	'set signature="~/.mutt/signatures/angel.informal"'
+
+# reset the sendmail command to the default one:
+send-hook ~A 'source $my_default_sendmail_config'
+
+# debugging: append this to the previous comman for logging activity:
+# ; set my_dummy=`VAR="";test-log "in send-hook";echo "DUMMY"`'
+
+# set the 'sendmail' command to send the message as is (i.e., text/plain)
+# for recipient matching this hook's pattern:
+send2-hook ~l 'source $my_sendmail_plain_config'
+
+# set the 'sendmail' command to send the message as HTML
+# for recipient matching this hook's pattern:
+send2-hook "!~l %C gmail-users" 'source $my_sendmail_html_config'

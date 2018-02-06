@@ -1,0 +1,6 @@
+#!/bin/sh
+# Demonstration of format string pipes. Sets the xterm title and returns the
+# string unchanged.
+#
+printf "\033]0;$2\007" > /dev/tty
+echo "$1"

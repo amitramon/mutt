@@ -1,0 +1,12 @@
+# color status green default
+
+set from      = $my_full_email_3
+#set sendmail  = "/usr/bin/msmtp -a gmail"
+set mbox      = "+cp/INBOX" # or archive?
+unset record
+set postponed = "+cp/drafts"
+
+# D overrides delete-pattern
+macro index,pager D "<save-message>+cp/trash<enter>" "move message to the trash"
+macro index,pager S "<save-message>+cp/spam<enter>"  "mark message as spam"
+

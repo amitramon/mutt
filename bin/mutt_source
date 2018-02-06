@@ -1,0 +1,5 @@
+#!/bin/bash
+
+the_file=$1; [ -s "$the_file" ] || the_file=/dev/null
+printf 'source %s' $the_file
+

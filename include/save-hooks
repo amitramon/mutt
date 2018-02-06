@@ -1,0 +1,9 @@
+# -*- muttrc -*-
+#
+# Save hooks
+#
+
+save-hook '~f root@localhost' = Temp/rootmail
+save-hook "!~l ~B '[^[:alpha:]]angel[^[:alpha:]]'" = people.
+save-hook '~f smith@example.org' = newsletters.smith
+save-hook "~B '(subscribe|remove)'" = newsletters.

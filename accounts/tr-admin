@@ -1,0 +1,12 @@
+# color status green default
+
+set from      = 
+set mbox      = "+tr-admin/INBOX"
+# unset record
+set record = +tr-admin/sent
+set postponed = "+tr-admin/drafts"
+
+# D overrides delete-pattern
+macro index,pager D "<save-message>+tr-admin/trash<enter>" "move message to the trash"
+macro index,pager S "<save-message>+tr-admin/spam<enter>"  "mark message as spam"
+

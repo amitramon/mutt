@@ -1,0 +1,8 @@
+#!/bin/bash
+# Demonstration of format string pipes. Sets the xterm title and returns the
+# string unchanged.
+
+# This is a dirty hack, it works only with tmux session
+the_tty=$(tmux lsc|sed 's|\(/dev/pts\/[0-9]\+\)\(: mail.*\)|\1|')
+printf "\033]0;$2\007" > $the_tty
+echo "$1"

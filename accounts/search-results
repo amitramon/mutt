@@ -1,0 +1,15 @@
+# -*- muttrc -*-
+#
+
+# color status cyan default
+
+# set from      = 
+# set mbox      = "+local/inbox" # or archive?
+# unset record
+# set postponed = "+local/drafts"
+
+# D overrides delete-pattern
+bind index A noop
+bind index D noop
+bind index S noop
+

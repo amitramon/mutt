@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# This script invoke Emacs to edit Mutt's mail _inside_ the mlterm's
+# terminal (and not in its own frame). Now that both Emacs and mlterm
+# support bi-directional text there is a problem when running Emacs
+# inside a BIDI-aware terminal - a RTL text will be 'inverted' by both
+# Emacs and mlterm, so the net result will be RTL text that is written
+# LTR.  This scrips tries to workaround this problem by turning off
+# mlterm's BIDI before launching Emacs, and turn it back on after
+# Emacs exits.
+
+# In order to do all of the above the following conditions have to be
+# met:
+
+# - mlterm must has a class name `my-mail-term'. This is achieved by
+#   launching it with the `name' option.
+# - mlterm should have keys defined as follows:
+# Control+Shift+F19="proto:use_bidi=false"
+# Control+Shift+F20="proto:use_bidi=true"
+
+log=~/mutt-editor.log
+#my_emacs=~/src/emacs/emacs-build/src/emacs
+my_emacs=emacs
+mail_class=my-mail-term
+
+date >> $log
+
+echo $(date +%s.%N) "before xdotol search" >> $log
+mail_window=$(xdotool search --class $mail_class)
+echo "mail_window:" $? $mail_window >> $log
+
+echo $(date +%s.%N) "before xdotool key" >> $log
+xdotool key --window $mail_window Control+Shift+F19
+echo "xdotool return value:" $? >> $log
+
+echo $(date +%s.%N) "calling Emacs..." >> $log
+$my_emacs --no-window-system --no-splash --no-desktop $@
+
+echo $(date +%s.%N) "Emacs exited, before xdotool key" >> $log
+xdotool key --window $mail_window Control+Shift+F20
+echo $(date +%s.%N) "xdotool return value:" $? >> $log
+echo ------------------------------- >> $log
+

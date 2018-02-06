@@ -1,0 +1,18 @@
+# -*- muttrc -*-
+
+# color status green default
+
+set from = $my_full_email_1
+#set sendmail  = "/usr/bin/msmtp -a gmail"
+set mbox = "+main/INBOX" # or archive?
+# unset record
+# set record = +main/sent
+set record = `printf '%s/%s' +main-sent $(date +%Y-%m)`
+set postponed = "+main/drafts"
+set sort=threads
+set sort_aux = last-date-received
+
+# D overrides delete-pattern
+macro index,pager D "<save-message>+main/trash<enter>" "move message to the trash"
+macro index,pager S "<save-message>+main/spam<enter>"  "mark message as spam"
+

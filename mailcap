@@ -1,0 +1,44 @@
+#
+# mailcap
+#
+
+image/tiff; mutt_bgrun evince '%s'; test=test -n "$DISPLAY" ; nametemplate=%s.tif
+image/*; mutt_bgrun display '%s'; test=test -n "$DISPLAY"
+application/pdf; mutt_bgrun evince '%s'; test=test -n "$DISPLAY" ; nametemplate=%s.pdf
+application/pdf; pdftotext %s -; copiousoutput
+application/msword; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+
+application/vnd.sun.xml.writer; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/vnd.sun.xml.calc; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/vnd.sun.xml.draw; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/vnd.sun.xml.impress; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/vnd.sun.xml.chart; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/vnd.sun.xml.math; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/vnd.sun.xml.writer.global ; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/vnd.oasis.opendocument.spreadsheet ; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+
+application/vnd.ms-excel; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/vnd.ms-word; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/mspowerpoint; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/mspowerpoint; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/vnd.ms-powerpoint; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/rtf; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+
+# a hack
+application/octet-stream; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+
+text/html; mutt_bgrun firefox '%s'; test=test -n "$DISPLAY"
+
+#text/html; links %s; nametemplate=%s.html
+#text/html; links -dump %s; nametemplate=%s.html; copiousoutput
+
+text/html; w3m %s; nametemplate=%s.html
+text/html; w3m -dump %s; nametemplate=%s.html; copiousoutput
+
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/vnd.openxmlformats-officedocument.spreadsheetml.template; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/vnd.openxmlformats-officedocument.presentationml.presentation; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/vnd.openxmlformats-officedocument.presentationml.slideshow; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/vnd.openxmlformats-officedocument.presentationml.template; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"
+application/vnd.openxmlformats-officedocument.wordprocessingml.template; mutt_bgrun viewdoc '%s'; test=test -n "$DISPLAY"

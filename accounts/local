@@ -1,0 +1,15 @@
+# -*- muttrc -*-
+#
+
+# color status cyan default
+
+set from = $my_full_email_5
+set mbox = "+local/inbox" # or archive?
+unset record
+set postponed = "+local/drafts"
+
+# D overrides delete-pattern
+macro index,pager A "<save-message>+local/archive<enter>" "archive message"
+macro index,pager D "<save-message>+local/trash<enter>" "move message to the trash"
+macro index,pager S "<save-message>+local/spam<enter>"  "mark message as spam"
+

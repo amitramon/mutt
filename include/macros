@@ -1,0 +1,176 @@
+# -*- muttrc -*-
+#
+# Macros for mutt.
+#
+
+
+## Page down/up
+#macro	index,pager	<PageDown>	<half-down>
+#macro	index,pager	<PageUp>	<half-up>
+
+
+## From header
+macro compose ,11 \
+      "<edit-from><kill-line>$my_full_email_1<enter>" \
+      "From: $my_full_email_1"
+
+macro compose ,12 \
+      "<edit-from><kill-line>$my_full_email_2<enter>" \
+      "From: $my_full_email_2"
+
+macro generic,index,pager "<esc>1" '\
+<enter-command>set from="$my_full_email_1"<enter>\
+<enter-command>set my_from_nickname="$my_nickname_1"<enter>\
+<refresh>'\
+ "Change the from value"
+
+macro generic,index,pager "<esc>2" '\
+<enter-command>set from="$my_full_email_2"<enter>\
+<enter-command>set my_from_nickname="$my_nickname_2"<enter>\
+<refresh>'\
+ "Change the from value"
+
+macro generic "<esc>3" '\
+<enter-command>set from="$my_full_email_3"<enter>\
+<enter-command>set my_from_nickname="$my_nickname_3"<enter>\
+<refresh>'\
+ "Change the from value"
+
+macro generic "<esc>4" '\
+<enter-command>set from="$my_full_email_4"<enter>\
+<enter-command>set my_from_nickname="$my_nickname_4"<enter>\
+<refresh>'\
+ "Change the from value"
+
+
+macro index ~l "<limit>~l<enter>" "limit to known lists."
+macro index ~u "<limit>~u<enter>" "limit to subscribed lists."
+macro index ~a "<limit>all<enter>" "remove limit."
+
+
+## Trash
+# macro index d "<save-message>=Trash<enter><limit>!~D<enter><end>"
+# macro index d "<save-message>=Trash<enter>"
+
+macro index,pager <f11> <purge-message> "Purge message immediately - use with caution"
+
+## Open archive folders
+macro index,pager ',a' \
+      '<enter-command> set mask=".*"<enter>\
+      <change-folder-readonly>~/.mail_archive/.<complete><complete>' \
+      'open an archive folder'
+
+## Change folder
+# Restore mask first
+
+# Original
+# macro index,pager 'c' '<enter-command>set mask=$my_mask<enter>\
+#			<change-folder>' 'open a different folder'
+
+# Mailboxes view
+macro index,pager 'M' '<change-folder>?<toggle-mailboxes>' "enter mailboxes view"
+
+# Open and search
+macro index,pager ',c' '<enter-command>set mask=$my_mask<enter>\
+			<change-folder>?<search>'\
+			'open a different folder and search'
+
+# Just open
+macro index,pager ',c' '<enter-command>set mask=$my_mask<enter>\
+			<change-folder>=<complete><complete><complete>'\
+			'open a different folder'
+
+
+
+
+# Load the inbox
+macro index,pager 'I'	'<change-folder>!<enter>' 'load the inbox'
+
+
+## Show documentation
+macro index,pager <f7> "<enter-command> unset wait_key<enter>\
+<shell-escape> zless /usr/share/doc/mutt/manual.txt.gz<enter>\
+<enter-command> set wait_key<enter>" "Show Mutt documentation"
+
+macro index,pager <f1> "!links /usr/share/doc/mutt/html/manual.html\n<refresh>"\
+      "Show Mutt manual"
+
+## meta-b -> search body (~b)
+macro index \eb '/~b ' 'search in message bodies'
+
+## change subject (was: original subject)
+macro compose \es '<edit-subject>)<bol> (was: <bol>'
+
+## show attachments
+# macro index A '<enter-command>set index_format="%4C %Z%?y?@& ? %?X?%X& ? %{%b %d} %-20.20L %?M?(#%3M)&(%4c)? %s"<enter>' "Show attachment count"
+# macro index \ca '<enter-command>set index_format="%4C %Z%?y?@& ? %{%b %d} %-20.20L %?M?(#%3M)&(%4c)? %s"<enter>' "Hide attachment count"
+
+## find first new message
+macro index '\ef' '<first-entry><next-new><current-middle>' 'center first new message'
+
+## first/last entry in pager
+macro pager - <exit><first-entry><display-message> "goto first message"
+# macro pager <home> <exit><first-entry><display-message> "goto first message" 
+macro pager = <exit><last-entry><display-message "goto last message"
+# macro pager <end> <exit><last-entry><display-message "goto last message">
+
+## verify sig when c_v_s is off by default
+macro index ,p "<enter-command> set crypt_verify_sig<enter>\
+<display-message><enter-command> unset crypt_verify_sig<enter>" "verify pgp sig"
+macro pager ,p "<enter-command> set crypt_verify_sig<enter>\
+<exit><display-message><enter-command> unset crypt_verify_sig<enter>" "verify pgp sig"
+
+
+## Mark all read
+macro index ,r '<tag-pattern>.<enter><tag-prefix-cond><clear-flag>N\
+<untag-pattern>.<enter><enter-command> set my_echo="All mail marked read"<enter>\
+<enter-command> set ?my_echo<enter>' "mark all read"
+
+## TOFU protection by t-prot
+macro index,pager	,t 	<enter-command>' unset display_filter;\
+set ?display_filter<enter>' "Turn TOFU protection off"
+macro index,pager	,T 	"<enter-command> set display_filter='t-prot $my_tprot';\
+set ?display_filter<enter>" "Turn TOFU protection on"
+
+## Reload config (f5)
+macro	index,pager,pager	<f5>	'<enter-command> set my_status="Reloaded configuration"; source ~/.mutt/muttrc; set ?my_status<enter>'	"reload muttrc"
+
+
+# macro generic,index,pager <f3> "<shell-escape>nmzmail -r ~/Mail/search-results<enter>" \
+#       "search via nmzmail"
+
+# macro generic,index,pager <f3> "<shell-escape>est-srch search<enter>" \
+#       "search via Hyperestraier"
+
+# macro generic,index,pager <f6> "<shell-escape>~/.mutt/search-mail/mailsrch.py<enter>\
+# <change-folder><kill-line>=search-results<enter>" \
+#       "search via Hyperestraier"
+
+macro generic,index,pager <f6> "<shell-escape>straymail -M<enter>\
+<change-folder><kill-line>=search-results<enter>" \
+      "search via Hyperestraier"
+
+macro generic,index,pager "~f" "<shell-escape>~/.mutt.backup/search-mail/mailsrch.py<enter>\
+<change-folder><kill-line>=search-results<enter>" \
+      "search via Hyperestraier"
+
+macro generic,index,pager <f4> "<change-folder><kill-line>=search-results<enter>" \
+      "load the search results mailbox"
+
+
+
+#------------------------------------------------------------
+
+macro pager "\eh" \
+      "<enter-command>set wait_key<enter>\
+<pipe-message>mailhops<enter>\
+<enter-command>unset wait_key<enter>" \
+ "View the path of the mail"
+
+
+macro generic,index,pager \ca \
+   "<enter-command>unset wait_key<enter>\
+<shell-escape>abook<return>\
+<enter-command>set wait_key<enter>" \
+"Launch abook"
+

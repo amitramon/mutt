@@ -1,0 +1,21 @@
+# -*- muttrc -*-
+#
+# List of mailing lists I'm subscribed to.
+#
+
+unlists *
+unsubscribe *
+
+# 'subscribe' or 'list' a mailing list enables 'list-reply' command,
+# causes the 'from' field in the index view to display the list name
+# instead of the sender (dependig on the format). Additionally, when
+# you send a message to a subscribed list, Mutt will add a
+# Mail-Followup-To header to tell other users' mail user agents not to
+# send copies of replies to your personal address.
+
+source  "$my_bin_dir/mutt_source $my_private_config/lists|" # private (not in vcs) lists
+
+subscribe emacs-bidi@gnu.org
+subscribe emacs-devel@gnu.org
+subscribe mutt-users@mutt.org
+subscribe neomutt-users@neomutt.org

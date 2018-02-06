@@ -1,0 +1,113 @@
+# -*- muttrc -*-
+#
+# Display settings
+#
+
+# after upgrade to Wheezy it seems Perl has a problem in line 66. In the meantime...
+# set display_filter="mail-to-filter" # a simple filter that weeds To: addresses
+
+set display_filter=`FILTER=""; if [ ! -n "$DISPLAY" ]; then FILTER=bidiv;fi;echo "$FILTER"`
+
+set attribution="%n <%a> [%{!%Y-%m-%d %H:%M %Z}]:\n" # And other displayed things.
+
+
+set my_status="%f-%r-(%?L?%L/?%l)--\
+{%?M?%M/?%m%?n? n:%n?%?o? o:%o?%?d? d:%d?%?t? t:%t?}\
+-%?b?-[Inc: %b]?-%?p?-[Post: %p]?-%>-%?V?/%V/&(%s/%S)?-%P-\$my_sendmail_desc"
+
+# the slash before the $-sign cause the variable to be evaluated at run time.
+set my_title="%h %f %?n?%n/?%m msgs %> \$my_from_nickname \$my_sendmail_desc"
+
+# a hack for mlterm; the first format string is for the status,
+# the second for the title line.
+set status_format="$my_bin_dir/mutt_status2 \"$my_status\" \"$my_title\"|"
+
+# In addition to true threading, glom together emails with similar Subjects.
+set nostrict_threads
+
+push <show-version>			# Show version at startup
+# set ascii_chars			# Fixes ugly arrows
+set sort=date			# Sort by threads
+set sort_aux=date-received		# Secondary sorting method
+
+set pager_index_lines=8			# 15 lines assigned to message list when viewing one
+set my_pager_index_lines=pager_index_lines
+set read_inc=25				# Read counter ticks every 100 msgs.
+set write_inc=25			# Write counter ticks every 100 msgs.
+set pager_stop				# Don't skip msgs on next page.
+unset menu_move_off			# Don't let last items of menus scroll up past the bottom of the screen.
+set menu_scroll				# Scroll line by line when reaching end of page.
+set menu_context=5			# Lines of context
+set pager_context=5			# Lines of context
+unset markers				# Add a '+' marker to wrapped lines.
+# set smart_wrap=no			# Don't wrap lines at word boundaries.
+
+# auto_view *
+# auto_view text/html # now in sourced file
+# (ar) not sure it is needed
+# iconv-hook iso-8859-8-i window-1255 
+
+#-------------------------------------------------
+# charset support
+#-------------------------------------------------
+# (ar) a workaround - if charset isn't defined,
+# it seems that mutt assumes us-ascii
+charset-hook us-ascii     cp1255
+
+# it seems that it is enough to have one of the following
+# settings -- leave them both just in case
+charset-hook iso-8859-8	      cp1255
+charset-hook iso-8859-8-i     cp1255
+
+# some messages are marked as iso-8859-1 while they are actually
+# iso-8859-8 or utf-8. since either utf-8 or cp1255 are (somewhat)
+# super-sets of iso-8859-1, this sets a reasonable default.  (I set
+# macros to switch between these two)
+charset-hook iso-8859-1	    cp1255
+#charset-hook iso-8859-1     utf-8
+charset-hook x-unknown	      cp1255
+charset-hook windows-1250     cp1250
+charset-hook windows-1251     cp1251
+charset-hook windows-1252     cp1252
+charset-hook windows-1253     cp1253
+charset-hook windows-1254     cp1254
+charset-hook windows-1255     cp1255
+charset-hook windows-1256     cp1256
+charset-hook windows-1257     cp1257
+charset-hook windows-1258     cp1258
+
+set assumed_charset="cp1255"
+
+# this supposed to solve problems with displaying
+# names of attached files (sent by, e.g., outlook).
+set rfc2047_parameters
+# end charset support
+
+
+mime_lookup application/octet-stream	# See if it is really the correct MIME type, otherwise change it.
+mime_lookup text/plain		 	# See if it is really the correct MIME type, otherwise change it.
+# Some people think that HTML is good for email <sigh>
+alternative_order text/enriched text/plain text/html
+# alternative_order text/plain text/html
+
+set ignore_list_reply_to
+set date_format="%a %d.%b.%y %H:%M"
+
+unset wait_key				# Don't prompt for a key press after shell-escape and the like.
+
+# set folder_format="%2C %8s %d %t %8N   %f"
+set folder_format="%2C %s %d %t %2N   %f"
+
+# the 'L' or 'C' in front of the size (and after the author)
+# is neccessary for correctly applying the BIDI algorithm
+# when having a mix of languages. in my case it is Hebrew
+# and English, and without the RTL character MLTERM does
+# not display properly.
+# index format for list folders
+set my_list_index_format="%4C %Z %{%b %d} %-15.15F %?l?L%4l&C%4c?   %s"
+# index format for all other folders
+set my_index_format="%4C %Z %{%b %d} %-15.15L %?l?L%4l&C%4c?   %s"
+# default format; switch in folder hooks
+set index_format=$my_index_format
+# set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s" # default
+

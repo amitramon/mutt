@@ -1,0 +1,19 @@
+# -*- muttrc -*-
+#
+
+# color status cyan default
+
+set from = $my_full_email_4
+#set sendmail  = "/usr/bin/msmtp -a gmail"
+set mbox      = "+riseup/INBOX" # or archive?
+# unset record
+set record = `printf '%s/%s' +riseup-sent $(date +%Y-%m)`
+set postponed = "+riseup/drafts"
+set sort=threads
+set sort_aux = last-date-received
+
+# D overrides delete-pattern
+macro index,pager A "<save-message>+riseup/archive<enter>" "archive message"
+macro index,pager D "<save-message>+riseup/Trash<enter>" "move message to the trash"
+macro index,pager S "<save-message>+riseup/spam<enter>"  "mark message as spam"
+

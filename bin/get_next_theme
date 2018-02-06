@@ -1,0 +1,23 @@
+#!/bin/bash
+
+themes_dir=~/.mutt/themes
+themes=($(ls $themes_dir))
+next_theme=""
+
+for theme in ${themes[*]}
+do
+    if [[ "$theme" > "$1" ]]
+    then
+	next_theme=$theme
+	break
+    fi
+done
+
+if [ -z "$next_theme" ]
+then
+    next_theme=${themes[0]}
+fi
+
+printf 'set my_theme=%s' $next_theme
+
+

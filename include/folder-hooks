@@ -1,0 +1,25 @@
+# -*- muttrc -*-
+#
+# folder  hooks
+#
+
+# Note: folder hook may get called after send-hook and send2-hook and
+# before actually sending the mail.
+folder-hook . 'set index_format=$my_index_format'
+
+#folder-hook	'=lists/.*'	'set index_format=$my_list_index_format; set sort=threads'
+
+folder-hook	'=main/sent' 'set index_format=$my_list_index_format; set sort=date'
+
+#folder-hook	.				'set sort=date; set sort_aux=date-received'
+
+# override with account specific folder-hooks
+folder-hook main/*             source ~/.mutt/accounts/gmail-ar
+folder-hook cp/*               source ~/.mutt/accounts/gmail-cp
+folder-hook tr-admin/* 	       source ~/.mutt/accounts/tr-admin
+folder-hook riseup/*           source ~/.mutt/accounts/riseup
+folder-hook local/*            source ~/.mutt/accounts/local
+folder-hook archive/*          source ~/.mutt/accounts/archive
+folder-hook search-results/*   source ~/.mutt/accounts/search-results
+
+

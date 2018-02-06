@@ -1,0 +1,9 @@
+#!/bin/bash
+
+mutt_root=~/.mutt
+
+if [[ $TERM =~ 256 ]]; then
+	echo "source $mutt_root/themes.256"
+else
+	echo "source $mutt_root/themes.default"
+fi

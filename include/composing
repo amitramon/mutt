@@ -1,0 +1,55 @@
+# -*- muttrc -*-
+#
+# Composing & sending
+#
+
+# include and quote the message to which I'm replying in my reply.
+set include=yes
+
+# Forwarded emails are done as MIME attachments.
+set mime_forward=ask-yes
+#set mime_forward			# Forward message as MIME attachments.
+unset reply_self
+set fast_reply
+# If the body of the email would trigger ">From" munging, use a character
+# encoding that will avoid the problem.
+set encode_from=yes
+
+
+# set editor="emacs --no-window-system --no-splash --no-desktop"
+# set editor=$my_bin_dir/my_editor
+#set editor=`EDITOR=emacs; if [ -n "$DISPLAY" ]; then EDITOR=$my_bin_dir/my_editor;fi;echo "$EDITOR"`
+# set editor=`EDITOR=emacs; if [ -n "$DISPLAY" ]; then EDITOR="emacsclient -c";fi;echo "$EDITOR"`
+
+set editor = "emacsclient -c -a '' -F '((width . 80) (height . 50) (top + 60) (left + 500))'"
+
+set edit_headers			# Permit editting of message headers
+set signature = "~/.signature"
+set abort_nosubject = no
+
+#------------------------------------------------------------
+#
+# Send mail settings
+#
+#------------------------------------------------------------
+
+set use_from = yes		# do insert FROM: field in the header
+set from = $my_full_email_1	# default value for header's FROM:
+set use_envelope_from = yes	# use envelope sender address
+
+# if different from 0, sending errors are not reported (?)
+set sendmail_wait = 0		# 0: block, <0 don't wait for sendmail; >0: wait
+
+#------------------------------------------------------------
+# my identities
+#------------------------------------------------------------
+
+# initialize with first identity
+set my_from_nickname = $my_nickname_1
+
+# set the 'sendmail' command
+set my_sendmail_plain_config = $my_sendmail_profiles_dir/sendmail-plain.rc
+set my_sendmail_html_config = $my_sendmail_profiles_dir/sendmail-html.rc
+set my_default_sendmail_config = $my_sendmail_html_config
+# now load sendmail configuration:
+source $my_default_sendmail_config
