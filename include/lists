@@ -17,5 +17,9 @@ source  "$my_bin_dir/mutt_source $my_private_config/lists|" # private (not in vc
 
 subscribe emacs-bidi@gnu.org
 subscribe emacs-devel@gnu.org
+
+subscribe mutt-dev@mutt.org
 subscribe mutt-users@mutt.org
+
+subscribe neomutt-devel@neomutt.org
 subscribe neomutt-users@neomutt.org

@@ -23,8 +23,9 @@ send-hook ~A 'source $my_default_sendmail_config'
 
 # set the 'sendmail' command to send the message as is (i.e., text/plain)
 # for recipient matching this hook's pattern:
+# ~l: catch all mail sent to lists (use 'subscribe' or 'lists' mutt command)
 send2-hook ~l 'source $my_sendmail_plain_config'
 
 # set the 'sendmail' command to send the message as HTML
 # for recipient matching this hook's pattern:
-send2-hook "!~l %C gmail-users" 'source $my_sendmail_html_config'
+# send2-hook "!~l %C gmail-users" 'source $my_sendmail_html_config'

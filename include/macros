@@ -43,6 +43,9 @@ macro generic "<esc>4" '\
  "Change the from value"
 
 
+# if it is not defined before. uncomment he following line:
+# bind index ~ noop
+
 macro index ~l "<limit>~l<enter>" "limit to known lists."
 macro index ~u "<limit>~u<enter>" "limit to subscribed lists."
 macro index ~a "<limit>all<enter>" "remove limit."
@@ -84,7 +87,8 @@ macro index,pager ',c' '<enter-command>set mask=$my_mask<enter>\
 
 
 # Load the inbox
-macro index,pager 'I'	'<change-folder>!<enter>' 'load the inbox'
+macro index,pager 'I'	'<change-folder>!<enter>' 'load main inbox'
+macro index,pager '<esc>i' '<change-folder>=riseup/INBOX<enter>' 'load riseup inbox'
 
 
 ## Show documentation
@@ -192,7 +196,7 @@ macro index,pager \cx\\ "<vfolder-from-query>"              "looks up a hand mad
 macro index,pager \cxa "<modify-labels>+archive -unread -inbox<enter>"        "tag as Archived"
 macro index,pager \cxi "<modify-labels>-inbox -unread<enter>"                 "removed from inbox"
 macro index,pager \cxs "<modify-labels-then-hide>-inbox -unread +junk<enter>" "tag as Junk mail"
-macro index,pager \cxd "<modify-labels>-inbox +trash<enter>" "tag as deleted mail"
+macro index,pager \cxd "<modify-labels>-inbox +deleted<enter>" "tag as deleted mail"
 
 # macro index + "<modify-labels>+*\\n<sync-mailbox>"               "tag as starred"
 # macro index - "<modify-labels>-*\\n<sync-mailbox>"               "tag as unstarred"

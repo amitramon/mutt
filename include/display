@@ -16,11 +16,12 @@ set my_status="%f-%r-(%?L?%L/?%l)--\
 -%?b?-[Inc: %b]?-%?p?-[Post: %p]?-%>-%?V?/%V/&(%s/%S)?-%P-\$my_sendmail_desc"
 
 # the slash before the $-sign cause the variable to be evaluated at run time.
-set my_title="%h %f %?n?%n/?%m msgs %> \$my_from_nickname \$my_sendmail_desc"
+# set my_title="%h %f %?n?%n/?%m msgs | \$my_from_nickname \$my_sendmail_desc"
+set my_title="%f %?n?%n/?%m msgs - \$my_from_nickname \$my_sendmail_desc"
 
 # a hack for mlterm; the first format string is for the status,
 # the second for the title line.
-set status_format="$my_bin_dir/mutt_status2 \"$my_status\" \"$my_title\"|"
+set status_format="$my_bin_dir/mutt_status \"$my_status\" \"$my_title\"|"
 
 # In addition to true threading, glom together emails with similar Subjects.
 set nostrict_threads
@@ -39,7 +40,9 @@ unset menu_move_off			# Don't let last items of menus scroll up past the bottom 
 set menu_scroll				# Scroll line by line when reaching end of page.
 set menu_context=5			# Lines of context
 set pager_context=5			# Lines of context
-unset markers				# Add a '+' marker to wrapped lines.
+
+# unset markers				# Add a '+' marker to wrapped lines.
+set markers=no				# Don't
 # set smart_wrap=no			# Don't wrap lines at word boundaries.
 
 # auto_view *

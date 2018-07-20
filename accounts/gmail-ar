@@ -3,11 +3,16 @@
 # color status green default
 
 set from = $my_full_email_1
+set my_from_nickname = $my_nickname_1
+
 #set sendmail  = "/usr/bin/msmtp -a gmail"
-set mbox = "+main/INBOX" # or archive?
-# unset record
-# set record = +main/sent
-set record = `printf '%s/%s' +main-sent $(date +%Y-%m)`
+set mbox = "+main/inbox" # or archive?
+
+# sent mail is handled by GMail - it is placed in the Gmail Sent
+# folder and later synced to the local folder
+unset record
+# set record = "+main/sent"
+# set record = `printf '%s/%s' +main-sent $(date +%Y-%m)`
 set postponed = "+main/drafts"
 set sort=threads
 set sort_aux = last-date-received

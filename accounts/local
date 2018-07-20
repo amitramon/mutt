@@ -3,7 +3,7 @@
 
 # color status cyan default
 
-set from = $my_full_email_5
+set from = $my_full_email_4
 set mbox = "+local/inbox" # or archive?
 unset record
 set postponed = "+local/drafts"

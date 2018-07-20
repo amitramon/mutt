@@ -77,13 +77,15 @@ set message_cachedir = ~/var/mutt/cache/messages
 # maildir settings
 set mbox_type           = Maildir                               # mailbox type
 # set folder              = ~/test-mail/Mail                                # mailbox location
-set folder              = ~/.mail                                # mailbox location
-#set spoolfile           = "+main/INBOX"                        # GMail is default inbox
+#set folder              = ~/.mail                                # mailbox location
+set folder              = ~/Mail                                # mailbox location
+set spoolfile           = "+main/inbox"                        # GMail is default inbox
 #set spoolfile           = "+amitlst/mail"                        # GMail is default inbox
-set spoolfile           = "+gmail-ar-archive/mail"                        # GMail is default inbox
+#set spoolfile           = "+gmail-ar-archive/mail"                        # GMail is default inbox
 
 # virtual mailboxes for notmuch integration
-set virtual_spoolfile=yes
+# 2018-05-03: comment 1 line to disable notmuch
+# set virtual_spoolfile=yes
 source $my_mutt_home/mailboxes
 
 # unset folder
@@ -100,7 +102,10 @@ source  $my_mutt_home/include/other-hooks
 source  $my_mutt_home/include/macros
 source  $my_mutt_home/include/lists
 source  $my_mutt_home/include/sidebar
-source  $my_mutt_home/include/notmuch
+
+# 2018-05-03: comment 1 line to disable notmuch
+# source  $my_mutt_home/include/notmuch
+
 # source  $my_mutt_home/include/bindings
 
 

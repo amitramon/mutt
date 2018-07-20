@@ -1,6 +1,7 @@
 #!/bin/sh
-# Demonstration of format string pipes. Sets the xterm title and returns the
-# string unchanged.
-#
-printf "\033]0;$2\007" > /dev/tty
+
+# Set the title of the terminal window from the second argument, return
+# the first argument for Mutt to use it to set the status line.
+
+printf "\033]0;$2\007" > $MAIL_TTY
 echo "$1"
