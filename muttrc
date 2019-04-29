@@ -24,6 +24,12 @@ set my_sendmail_profiles_dir = "$my_mutt_home/sendmail-profiles"
 set my_themes_dir = "$my_mutt_home/themes"
 set my_bin_dir = "$my_mutt_home/bin"
 
+
+# need to unbind ~ so it can be used as a prefix. since key sequences
+# prefixed with ~ are used in several sourced files, the unbinding is
+# done in this main muttrc file.
+bind index ~ noop
+
 # private settings - most probably email addresses and similar stuff
 # that one wouldn't like to keep in vcs.
 # as an example, look at the file private-settings-template.

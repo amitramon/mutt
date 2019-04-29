@@ -1,7 +1,7 @@
 # -*- muttrc -*-
 
 # set to plainMail2HTML mail sender:
-set sendmail = ~/bin/html-sendmail
+set sendmail = html-sendmail
 
 # To have visual state indication, you can catenate this variable's
 # value to you Mutt's status line or title. If you do so, you might

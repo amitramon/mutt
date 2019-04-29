@@ -43,7 +43,9 @@ macro generic "<esc>4" '\
  "Change the from value"
 
 
-# if it is not defined before. uncomment he following line:
+# need to unbind ~ so it can be used as a prefix. however, since key sequences
+# prefixed with ~ are used in several sourced files, the unbinding is done in
+# the main muttrc file.
 # bind index ~ noop
 
 macro index ~l "<limit>~l<enter>" "limit to known lists."
